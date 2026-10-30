@@ -1,6 +1,7 @@
 import pytest
 import allure
 from methods.user_methods import UserMethods
+from messages import USER_ALREADY_EXISTS, REQUIRED_FIELDS
 
 
 class TestRegistaration:
@@ -10,6 +11,8 @@ class TestRegistaration:
     def test_register_success(self, user_data):
         response = UserMethods.register_user(user_data)
         assert response.status_code == 200 and response.json()['success'] is True
+
+        UserMethods.delete_user({"Authorization": response.json()['accessToken']})
 
     @allure.title("Регистрация")
     @allure.description("Регистрация существующего пользователя")
@@ -21,11 +24,11 @@ class TestRegistaration:
         }
     
         response = UserMethods.register_user(existing_user)
-        assert response.status_code == 403 and response.json()['message'] == "User already exists"
+        assert response.status_code == 403 and response.json()['message'] == USER_ALREADY_EXISTS
 
     @allure.title("Регистрация")
     @allure.description("Регистрация без обязательных полей")
     def test_register_missing_fields(self, user_data):
         del user_data['password']
         response = UserMethods.register_user(user_data)
-        assert response.status_code == 403 and response.json()['message'] == "Email, password and name are required fields"
+        assert response.status_code == 403 and response.json()['message'] == REQUIRED_FIELDS

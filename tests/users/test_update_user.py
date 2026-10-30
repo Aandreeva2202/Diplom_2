@@ -1,5 +1,6 @@
 import allure
 from methods.user_methods import UserMethods
+from messages import UNAUTHORISED
 
 
 class TestUpdateUser:
@@ -33,10 +34,10 @@ class TestUpdateUser:
     @allure.description("Попытка обновления email без авторизации")
     def test_update_email_unauthorized(self):
         response = UserMethods.update_user({}, {"email": "test@test.com"})
-        assert response.json()['message'] == "You should be authorised" and response.status_code == 401
+        assert response.json()['message'] == UNAUTHORISED and response.status_code == 401
 
     @allure.title("Обновление данных")
     @allure.description("Попытка обновления name без авторизации")
     def test_update_name_unauthorized(self):
         response = UserMethods.update_user({}, {"name": "NewName"})
-        assert response.json()['message'] == "You should be authorised" and response.status_code == 401
+        assert response.json()['message'] == UNAUTHORISED and response.status_code == 401

@@ -1,5 +1,6 @@
 import allure
 from methods.order_methods import OrderMethods
+from messages import UNAUTHORISED
 
 
 class TestGetOrder:
@@ -21,4 +22,4 @@ class TestGetOrder:
         response = OrderMethods.get_user_orders({})
         response_data = response.json()
 
-        assert response.status_code == 401 and response_data['success'] is False and response_data['message'] == "You should be authorised"
+        assert response.status_code == 401 and response_data['success'] is False and response_data['message'] == UNAUTHORISED

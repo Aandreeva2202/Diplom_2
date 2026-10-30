@@ -1,5 +1,6 @@
 import allure
 from methods.order_methods import OrderMethods
+from messages import INGREDIENTS_REQUIRED
 
 
 class TestCreateOrder:
@@ -39,7 +40,7 @@ class TestCreateOrder:
         token = create_user['accessToken']
         headers = {"Authorization": token}
         response = OrderMethods.create_order(headers=headers)
-        assert response.status_code == 400 and response.json()['message'] == "Ingredient ids must be provided"
+        assert response.status_code == 400 and response.json()['message'] == INGREDIENTS_REQUIRED
 
     @allure.title("Создание заказа")
     @allure.description("Создание заказа с неверным хешем ингредиента")

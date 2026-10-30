@@ -1,5 +1,6 @@
 import allure
 from methods.user_methods import UserMethods
+from messages import INCORRECT_CREDENTIALS
 
 
 class TestLogin:
@@ -22,4 +23,4 @@ class TestLogin:
             "password": "wrong_password"
         }
         response = UserMethods.login_user(credentials)
-        assert response.status_code == 401 and response.json()['message'] == "email or password are incorrect"
+        assert response.status_code == 401 and response.json()['message'] == INCORRECT_CREDENTIALS

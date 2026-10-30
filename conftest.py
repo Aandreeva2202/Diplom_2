@@ -20,9 +20,8 @@ def create_user(user_data):
         'refreshToken': user['refreshToken']
     }
     
-    UserMethods.delete_user({
-        "Authorization": f"Bearer {response.json()['accessToken']}"
-    })
+    # accessToken уже содержит префикс "Bearer "
+    UserMethods.delete_user({"Authorization": user['accessToken']})
 
 @pytest.fixture(scope="function")
 def valid_ingredients():
