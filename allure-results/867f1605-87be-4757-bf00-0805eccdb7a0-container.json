@@ -1,0 +1,1 @@
+{"uuid": "e0597c53-1a8b-4748-b97c-4d60b37da791", "children": ["27fdf1c4-dc13-442a-b793-32453a039547"], "befores": [{"name": "valid_ingredients", "status": "passed", "start": 1793349356776, "stop": 1793349356880}], "afters": [{"name": "valid_ingredients::<lambda>", "start": 1793349357178}], "start": 1793349356776, "stop": 1793349357178}
